@@ -1,0 +1,57 @@
+OASISFormat:      0.4
+Name:             ocamlcanswer
+Version:          0.0.1
+Synopsis:         Canswer in OCaml
+Authors:          Fabian Pijcke <fabian.pijcke@gmail.com>
+License:          LGPL-3.0 with OCaml linking exception
+Plugins:          META (0.4), StdFiles (0.4), DevFiles (0.4)
+BuildTools:       ocamlbuild, ocamldoc
+OCamlVersion:     >= 4.02.0
+
+Library canswer_core
+  InternalModules:  FromStringParser, FromStringLexer
+  Modules:          Lset, Symbol, RelationName, Substitution, Atom, Conjunctive, FromString
+  BuildTools+:      ocamlyacc, ocamllex
+  Path:             core
+  ByteOpt:          -safe-string
+  NativeOpt:        -safe-string
+  CompiledObject:   native
+
+Library canswer_attackgraph
+  Modules:      FunDep, AttackGraph
+  BuildDepends: canswer_core
+  Path:         attackgraph
+
+Library canswer_rewrite
+  Modules:      Rc, Drc, Trc, Sql
+  BuildDepends: canswer_core, canswer_attackgraph
+  Path:         rewrite
+
+Library canswer_cqafo
+  Modules:      CqaFO, Expanded, Collapsed
+  BuildDepends: canswer_core, canswer_attackgraph
+  Path:         cqafo
+
+Library canswer
+  Path:             src
+  Modules:          Canswer, ToString, ToDot, ToLatex
+  BuildDepends:     canswer_core, canswer_attackgraph, canswer_rewrite, canswer_cqafo
+
+Executable tester
+  BuildDepends: oUnit, canswer
+  Build$:       flag(tests)
+  Install:      false
+  MainIs:       main.ml
+  Path:         tests
+
+Test canswertests
+  TestTools:  tester
+  Command:    $tester
+
+Document API
+  Title:                API reference for Canswer
+  Type:                 OCamlbuild (0.4)
+  InstallDir:           $docdir/api
+  XOCamlbuildPath:      .
+  XOCamlbuildLibraries: canswer
+

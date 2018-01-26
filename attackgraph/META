@@ -1,0 +1,12 @@
+# OASIS_START
+# DO NOT EDIT (digest: 26b8ab6175caab1303df918bf7d6ca1b)
+version = "0.0.1"
+description = "Canswer in OCaml"
+requires = "canswer_core"
+archive(byte) = "canswer_attackgraph.cma"
+archive(byte, plugin) = "canswer_attackgraph.cma"
+archive(native) = "canswer_attackgraph.cmxa"
+archive(native, plugin) = "canswer_attackgraph.cmxs"
+exists_if = "canswer_attackgraph.cma"
+# OASIS_STOP
+

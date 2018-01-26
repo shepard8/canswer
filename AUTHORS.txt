@@ -1,0 +1,8 @@
+(* OASIS_START *)
+(* DO NOT EDIT (digest: f83f444ca3a2145123604cfc8f4f734f) *)
+
+Authors of ocamlcanswer:
+
+* Fabian Pijcke <fabian.pijcke@gmail.com>
+
+(* OASIS_STOP *)

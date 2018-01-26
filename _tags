@@ -1,0 +1,53 @@
+# OASIS_START
+# DO NOT EDIT (digest: 3bae5c69875b3c99542832b87c00da34)
+# Ignore VCS directories, you can use the same kind of rule outside
+# OASIS_START/STOP if you want to exclude directories that contains
+# useless stuff for the build process
+true: annot, bin_annot
+<**/.svn>: -traverse
+<**/.svn>: not_hygienic
+".bzr": -traverse
+".bzr": not_hygienic
+".hg": -traverse
+".hg": not_hygienic
+".git": -traverse
+".git": not_hygienic
+"_darcs": -traverse
+"_darcs": not_hygienic
+# Library canswer_core
+"core/canswer_core.cmxs": use_canswer_core
+"core/canswer_core.cmxa": oasis_library_canswer_core_byte
+<core/*.ml{,i,y}>: oasis_library_canswer_core_byte
+"core/canswer_core.cmxa": oasis_library_canswer_core_native
+<core/*.ml{,i,y}>: oasis_library_canswer_core_native
+# Library canswer_attackgraph
+"attackgraph/canswer_attackgraph.cmxs": use_canswer_attackgraph
+<attackgraph/*.ml{,i,y}>: use_canswer_core
+# Library canswer_rewrite
+"rewrite/canswer_rewrite.cmxs": use_canswer_rewrite
+<rewrite/*.ml{,i,y}>: use_canswer_attackgraph
+<rewrite/*.ml{,i,y}>: use_canswer_core
+# Library canswer_cqafo
+"cqafo/canswer_cqafo.cmxs": use_canswer_cqafo
+<cqafo/*.ml{,i,y}>: use_canswer_attackgraph
+<cqafo/*.ml{,i,y}>: use_canswer_core
+# Library canswer
+"src/canswer.cmxs": use_canswer
+<src/*.ml{,i,y}>: use_canswer_attackgraph
+<src/*.ml{,i,y}>: use_canswer_core
+<src/*.ml{,i,y}>: use_canswer_cqafo
+<src/*.ml{,i,y}>: use_canswer_rewrite
+# Executable tester
+"tests/main.byte": package(oUnit)
+"tests/main.byte": use_canswer
+"tests/main.byte": use_canswer_attackgraph
+"tests/main.byte": use_canswer_core
+"tests/main.byte": use_canswer_cqafo
+"tests/main.byte": use_canswer_rewrite
+<tests/*.ml{,i,y}>: package(oUnit)
+<tests/*.ml{,i,y}>: use_canswer
+<tests/*.ml{,i,y}>: use_canswer_attackgraph
+<tests/*.ml{,i,y}>: use_canswer_core
+<tests/*.ml{,i,y}>: use_canswer_cqafo
+<tests/*.ml{,i,y}>: use_canswer_rewrite
+# OASIS_STOP
